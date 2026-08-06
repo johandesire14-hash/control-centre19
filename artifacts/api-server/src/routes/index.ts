@@ -1,0 +1,42 @@
+import { Router, type IRouter } from "express";
+import healthRouter from "./health";
+import authRouter from "./auth";
+import storageRouter from "./storage";
+import imagesRouter from "./images";
+import profileRouter from "./profile";
+import statsRouter from "./stats";
+import garagesRouter from "./garages";
+import reviewsRouter from "./reviews";
+import favoritesRouter from "./favorites";
+import messagesRouter from "./messages";
+import notificationsRouter from "./notifications";
+import certificationRouter from "./certification";
+import uploadRouter from "./upload";
+import kpayRouter from "./kpay";
+import momoRouter from "./momo";
+import supportRouter from "./support";
+import profileViewsRouter from "./profileViews";
+import phoneAuthRouter from "./phoneAuth";
+
+const router: IRouter = Router();
+
+router.use(healthRouter);
+router.use(authRouter);
+router.use(uploadRouter);
+router.use(storageRouter);
+router.use(imagesRouter);
+router.use(profileRouter);
+router.use(statsRouter);
+router.use(garagesRouter);
+router.use(reviewsRouter);
+router.use(favoritesRouter);
+router.use(messagesRouter);
+router.use(notificationsRouter);
+router.use(certificationRouter);
+router.use(kpayRouter);
+router.use(momoRouter);
+router.use(supportRouter);
+router.use(profileViewsRouter);
+router.use(phoneAuthRouter);
+
+export default router;

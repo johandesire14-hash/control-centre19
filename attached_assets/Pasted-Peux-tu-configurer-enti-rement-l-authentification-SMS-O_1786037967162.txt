@@ -1,0 +1,31 @@
+Peux-tu configurer entièrement l'authentification SMS OTP (Congo +242) avec Firebase Auth et la synchronisation avec Supabase pour mon projet Expo / React Native ?
+
+Voici ce qu'il faut réaliser étape par étape dans la structure du projet :
+
+1. CONFIGURATION DES VARIABLES D'ENVIRONNEMENT :
+   - Utilise les variables d'environnement suivantes qui sont déjà définies dans Replit Secrets :
+     - process.env.EXPO_PUBLIC_SUPABASE_URL
+     - process.env.EXPO_PUBLIC_SUPABASE_ANON_KEY
+     - process.env.EXPO_PUBLIC_FIREBASE_API_KEY
+     - process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID
+
+2. INITIALISATION DES SERVICES (fichiers de config) :
+   - Installe les dépendances requises si elles manquent (@supabase/supabase-js, firebase ou @react-native-firebase).
+   - Crée le fichier de configuration Firebase (`src/config/firebaseConfig.js`) initialisé avec les clés EXPO_PUBLIC_FIREBASE.
+   - Crée / met à jour le fichier `src/config/supabaseClient.js` pour exporter le client Supabase en y injectant dynamiquement le jeton JWT Firebase pour la sécurité RLS.
+
+3. CRÉATION DU COMPOSANT D'AUTHENTIFICATION :
+   - Crée le composant `src/screens/AuthScreen.jsx` (ou met à jour le composant d'authentification existant).
+   - Intègre la logique de nettoyage et formatage du numéro pour le Congo (+242) :
+     - Supprime les espaces et caractères non numériques.
+     - Retire le "0" initial (ex: "06 600 0000" devient "+24266000000").
+   - Implémente le flux en 2 étapes :
+     1. Écran de saisie du numéro avec bouton "Envoyer le code".
+     2. Écran de saisie du code à 6 chiffres avec bouton "Vérifier le code".
+   - Dès que le code OTP est validé par Firebase, effectue un `upsert` dans la table `profiles` de Supabase avec l'ID utilisateur (`user.uid`) et son numéro de téléphone (`user.phoneNumber`).
+
+4. INTÉGRATION ET NETTOYAGE :
+   - Assure-toi que `App.js` (ou l'entrée principale) charge cet écran `AuthScreen`.
+   - Vérifie que le code s'exécute sans erreur de compilation dans l'environnement Expo.
+
+Génère tous les fichiers nécessaires et mets à jour le projet automatiquement.
